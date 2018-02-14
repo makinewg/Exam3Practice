@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  SEQUENCES.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and William Makinen.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -120,21 +120,17 @@ def practice_problem4a(sequence):
          -- this function returns [2, 5]
               since 8 appears twice in a row starting at index 2
               and 4 appears twice in a row starting at index 5
-
       Given sequence (9, 9, 9, 9, 0, 9, 9, 9)
          -- this function returns [0, 1, 2, 5, 6]
-
       Given sequence (4, 5, 4, 5, 4, 5, 4)
          -- this function returns []
-
       Given sequence 'abbabbb'
          -- this function returns [1, 4, 5]
-
     Type hints:
       :type sequence: list | tuple | string
     """
     ####################################################################
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
@@ -142,6 +138,14 @@ def practice_problem4a(sequence):
     #    TIME ESTIMATE:   15 minutes.
     ####################################################################
 
+    count = []
+    for k in range(len(sequence)):
+        if k == len(sequence) - 1:
+            count = count
+        else:
+            if sequence[k] == sequence[k + 1]:
+                count += [k]
+    return count
 
 def run_test_practice_problem4b():
     """ Tests the    practice_problem4b    function. """
@@ -192,18 +196,28 @@ def practice_problem4b(sequence):
       then the largest of the numbers at EVEN indices is the largest of
            12      18     13     99      19        which is 99.
       So the function returns 99 in this example.
-
     Type hints:
       :type sequence: (list | tuple) of (float | int)
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      5
     #    TIME ESTIMATE:   10 minutes.
     ####################################################################
+
+    count = []
+    for k in range(len(sequence)):
+        if k % 2 == 0:
+            count += [sequence[k]]
+    bi = count[0]
+    for l in range(len(count)):
+        if count[l] > bi:
+            bi = count[l]
+    return bi
+
 
 
 def run_test_practice_problem4c():
@@ -295,7 +309,7 @@ def practice_problem4c(points):
       :rtype: rg.Point | string
     """
     ####################################################################
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #     The testing code is already written for you (above).
     #
     # IMPORTANT: This problem is your LOWEST PRIORITY for preparing
@@ -306,6 +320,16 @@ def practice_problem4c(points):
     #    DIFFICULTY:      9
     #    TIME ESTIMATE:   15 minutes.
     ####################################################################
+
+    for k in range(len(points)):
+        s = points[k]
+        if is_prime(s.x):
+            if is_prime(s.y):
+                r = s.x
+                s.x = s.y
+                s.y = r
+                return points[k]
+    return 'Not found'
 
 
 def run_test_practice_problem4d():
@@ -356,48 +380,52 @@ def practice_problem4d(sequence):
             because:
             6 (at index 0) is NOT prime - do NOT include 6 in the sum
             80 (at index 1) is NOT prime - do NOT include 80 in the sum
-
             17 (at index 2) IS prime AND the next item (13, at index 3)
               is a DIFFERENT prime - ** DO ** include 17 in the sum
-
             13 (at index 3) IS prime but the next item (40, at index 4)
               is NOT prime - do NOT include 13 in the sum
             40 (at index 4) is NOT prime - do NOT include 40 in the sum
             3 (at index 5) IS prime AND the next item (3, at index 6)
               IS prime but is NOT a DIFFERENT prime -
               do NOT include 3 in the sum
-
             3 (at index 6) IS prime AND the next item (7, at index 7)
               is a DIFFERENT prime - ** DO ** include 3 in the sum
             7 (at index 7) IS prime AND the next item (13, at index 8)
               is a DIFFERENT prime - ** DO ** include 7 in the sum
             13 (at index 8) IS prime AND the next item (7, at index 9)
               is a DIFFERENT prime - ** DO ** include 13 in the sum
-
             7 (at index 9) IS prime but the next item (12, at index 10)
               is NOT prime - do NOT include 7 in the sum
             12 (at index 10) is NOT prime - do NOT include 12 in the sum
             5 (at index 11) IS prime but there is NO item after it
                - do NOT include 5 in the sum
-
       Given sequence (7, 7, 7, 7, 7, 4, 4, 8, 5, 5, 6)
          -- this function returns 0
-
       Given sequence (2, 3, 5, 7, 5, 3, 2)
          -- this function returns 2 + 3 + 5 + 7 + 5 + 3, which is 25
-
     Type hints:
       :type sequence: (list | tuple) of int
       :rtype: int
     """
     ####################################################################
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:   15 minutes.
     ####################################################################
+
+    sum = 0
+    for k in range(len(sequence)):
+        if k == len(sequence) - 1:
+            sum = sum
+        else:
+            if is_prime(sequence[k]):
+                if is_prime(sequence[k + 1]):
+                    if sequence[k] != sequence[k + 1]:
+                        sum += sequence[k]
+    return sum
 
 
 # ----------------------------------------------------------------------
